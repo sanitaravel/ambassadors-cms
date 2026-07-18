@@ -133,8 +133,8 @@ This plan implements the integration layer between the React 19 frontend and the
     - Test reset on mutation hook
     - _Requirements: 8.1, 8.2, 8.3, 8.4, 8.5, 8.6, 8.7, 8.8_
 
-- [ ] 8. Implement Auth Context
-  - [ ] 8.1 Implement AuthProvider and useAuth hook
+- [x] 8. Implement Auth Context
+  - [x] 8.1 Implement AuthProvider and useAuth hook
     - Create `src/context/auth-context.tsx`
     - Implement `AuthProvider` wrapping children with context
     - Expose `user`, `role`, `profile`, `isAuthenticated`, `isLoading`, `error`, `login`, `register`, `logout`
@@ -146,12 +146,12 @@ This plan implements the integration layer between the React 19 frontend and the
     - `useAuth()` throws if called outside AuthProvider
     - _Requirements: 4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7, 9.1, 9.2, 9.3, 9.4, 9.5, 9.6, 9.7, 9.8, 10.1, 10.2, 10.3, 10.4, 10.5, 10.6, 10.7, 10.8_
 
-  - [ ]* 8.2 Write property test for role determination (Property 11)
+  - [x] 8.2 Write property test for role determination (Property 11)
     - **Property 11: Role Determination from Profile Relations** — ambassador_profile non-null → "ambassador"; else student_profile non-null → "student"; else professor_profile non-null → "professor"; else null
     - Create `src/context/__tests__/role-determination.property.test.ts` using fast-check
     - **Validates: Requirements 10.2, 10.3, 10.4, 10.5**
 
-  - [ ]* 8.3 Write unit tests for AuthProvider
+  - [x] 8.3 Write unit tests for AuthProvider
     - Create `src/context/__tests__/auth-context.test.tsx`
     - Test session restoration (token present → valid, token present → expired, no token)
     - Test login/logout state transitions
