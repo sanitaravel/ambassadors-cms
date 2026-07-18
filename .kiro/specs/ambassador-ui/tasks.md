@@ -6,35 +6,35 @@ Build the React SPA content management interface for the SRH Ambassador Platform
 
 ## Tasks
 
-- [ ] 1. Create utility functions and type definitions
-  - [ ] 1.1 Create form data types and validation utilities
+- [x] 1. Create utility functions and type definitions
+  - [x] 1.1 Create form data types and validation utilities
     - Create `src/types/forms.ts` with `ClubFormData`, `BuildingFormData`, `EventFormData`, `NewsArticleFormData` interfaces
     - Create `src/utils/validation.ts` with `ValidationResult` interface and `validateClubForm`, `validateBuildingForm`, `validateEventForm`, `validateNewsArticleForm` pure functions
     - All required fields must reject empty/whitespace-only values; event form must reject `ends_at <= starts_at`
     - _Requirements: 6.3, 7.3, 8.3, 8.4, 9.3, 10.4_
 
-  - [ ] 1.2 Create permission and formatting utilities
+  - [x] 1.2 Create permission and formatting utilities
     - Create `src/utils/permissions.ts` with `getPermittedContentTypes(role)` returning content type arrays per role
     - Create `src/utils/format.ts` with `truncateUsername(username, maxLength?)` that truncates at 20 chars with "..." suffix
     - Create `src/utils/redirect-store.ts` with `storeRedirectPath`, `getRedirectPath`, `clearRedirectPath` using localStorage
     - _Requirements: 3.2, 4.2, 4.3, 11.1, 11.2_
 
-  - [ ]* 1.3 Write property tests for truncateUsername
+  - [x] 1.3 Write property tests for truncateUsername
     - **Property 1: Username Truncation**
     - Verify: strings > 20 chars produce 23-char output (20 + "..."); strings ≤ 20 chars return unchanged
     - **Validates: Requirements 3.2**
 
-  - [ ]* 1.4 Write property tests for getPermittedContentTypes
+  - [x] 1.4 Write property tests for getPermittedContentTypes
     - **Property 2: Role-Based Dashboard Card Visibility**
     - Verify: student/ambassador → all 4 content types; professor/null → only buildings + news-articles
     - **Validates: Requirements 4.2, 4.3**
 
-  - [ ]* 1.5 Write property tests for form validation (required fields)
+  - [x] 1.5 Write property tests for form validation (required fields)
     - **Property 3: Required Field Validation Rejects Empty/Whitespace Input**
     - Generate arbitrary whitespace strings for each required field across all form validators and assert `valid: false`
     - **Validates: Requirements 6.3, 7.3, 8.4, 9.3**
 
-  - [ ]* 1.6 Write property test for event date validation
+  - [x] 1.6 Write property test for event date validation
     - **Property 4: Event Date Validation**
     - Generate datetime pairs where `ends_at <= starts_at` and assert `validateEventForm` returns error with "End time must be after start time"
     - **Validates: Requirements 8.3**
