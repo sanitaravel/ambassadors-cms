@@ -15,7 +15,7 @@ This plan implements the integration layer between the React 19 frontend and the
     - Create `src/test/setup.ts` importing `@testing-library/jest-dom`
     - _Requirements: Design Testing Strategy_
 
-- [ ] 2. Implement Infrastructure Layer
+- [x] 2. Implement Infrastructure Layer
   - [x] 2.1 Create TypeScript types and interfaces for API layer
     - Create `src/api/types.ts` with `ApiError`, `ValidationError`, `StrapiEntity<T>`, `StrapiResponse<T>`, `StrapiSingleResponse<T>`, `PaginationMeta`, `CollectionResponse<T>` types
     - Create `src/api/content-types.ts` with all content type interfaces: `Campus`, `Building`, `Location`, `Event`, `EventAttendee`, `ActivityClub`, `ClubMembership`, `AmbassadorProfile`, `StudentProfile`, `ProfessorProfile`, `NewsArticle`, `Issue`
@@ -27,7 +27,7 @@ This plan implements the integration layer between the React 19 frontend and the
     - Use localStorage with key `strapi_jwt`
     - _Requirements: 1.4, 1.5, 4.1_
 
-  - [ ] 2.3 Implement API Client
+  - [x] 2.3 Implement API Client
     - Create `src/api/client.ts` with `apiClient<T>(options: ApiRequestOptions): Promise<T>`
     - Read base URL from `import.meta.env.VITE_STRAPI_URL` defaulting to `http://localhost:1337`
     - Prepend `${baseUrl}/api` to all request paths
@@ -38,7 +38,7 @@ This plan implements the integration layer between the React 19 frontend and the
     - On 401 (non-auth endpoints), clear token and dispatch `auth:expired` custom event
     - _Requirements: 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 7.1, 7.2, 7.3, 7.4, 7.5, 7.6_
 
-  - [ ]* 2.4 Write property tests for API Client (Properties 1, 2, 10)
+  - [x] 2.4 Write property tests for API Client (Properties 1, 2, 10)
     - **Property 1: URL Construction** — For any valid path, URL is `${baseUrl}/api${path}`
     - **Property 2: Request Header Injection** — Token presence → Bearer header; body presence → Content-Type header
     - **Property 10: Error Response Parsing** — 4xx/5xx with JSON error body → structured ApiError
