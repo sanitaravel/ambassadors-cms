@@ -50,21 +50,21 @@ Build the React SPA content management interface for the SRH Ambassador Platform
     - Remove default Vite boilerplate content from App.tsx
     - _Requirements: 3.1, 11.4_
 
-  - [ ] 3.2 Create AuthGuard component
+  - [x] 3.2 Create AuthGuard component
     - Create `src/components/auth/AuthGuard.tsx` that checks `useAuth().isAuthenticated`
     - If `isLoading`, render a loading spinner
     - If unauthenticated, store current path via `storeRedirectPath` and redirect to `/login`
     - If authenticated, render children/outlet
     - _Requirements: 11.1, 11.4_
 
-  - [ ] 3.3 Create AppLayout with NavBar
+  - [x] 3.3 Create AppLayout with NavBar
     - Create `src/components/layout/NavBar.tsx` with links to Dashboard, Activity Clubs, Buildings, Events, News Articles
     - Right side: truncated username (using `truncateUsername`) + logout button
     - Create `src/components/layout/AppLayout.tsx` rendering NavBar + `<Outlet />`
     - Use white (#FFFFFF) background; accent color (#d54407) for active nav links
     - _Requirements: 3.1, 3.2, 3.3, 3.4, 3.6, 12.1, 12.2_
 
-  - [ ] 3.4 Create NotFoundPage
+  - [x] 3.4 Create NotFoundPage
     - Create `src/pages/NotFoundPage.tsx` displaying a 404 message and a link back to Dashboard
     - Register as catch-all route in router config
     - _Requirements: 3.5_

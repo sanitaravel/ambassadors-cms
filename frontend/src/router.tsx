@@ -1,4 +1,7 @@
-import { createBrowserRouter, Outlet } from 'react-router';
+import { createBrowserRouter } from 'react-router';
+import { AuthGuard } from './components/auth/AuthGuard';
+import { AppLayout } from './components/layout/AppLayout';
+import { NotFoundPage } from './pages/NotFoundPage';
 
 // Placeholder components — will be replaced with real implementations in later tasks
 
@@ -46,19 +49,8 @@ function EditNewsArticlePage() {
   return <div>Edit News Article</div>;
 }
 
-function NotFoundPage() {
-  return <div>404 — Page Not Found</div>;
-}
-
-// Placeholder AuthGuard — will be implemented in task 3.2
-function AuthGuard() {
-  return <Outlet />;
-}
-
-// Placeholder AppLayout — will be implemented in task 3.3
-function AppLayout() {
-  return <Outlet />;
-}
+// AuthGuard imported from src/components/auth/AuthGuard.tsx
+// AppLayout imported from src/components/layout/AppLayout.tsx
 
 export const router = createBrowserRouter([
   // Public routes
