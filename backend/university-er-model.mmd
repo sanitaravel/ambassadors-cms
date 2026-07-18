@@ -1,0 +1,177 @@
+erDiagram
+  USER {
+    uuid id PK
+    string full_name
+    string email
+    string role
+    string status
+    datetime created_at
+  }
+
+  STUDENT_PROFILE {
+    uuid user_id PK, FK
+    string student_number
+    string program
+    int year_of_study
+  }
+
+  AMBASSADOR_PROFILE {
+    uuid user_id PK, FK
+    string focus_area
+    string notes
+  }
+
+  PROFESSOR_PROFILE {
+    uuid user_id PK, FK
+    string department
+    string title
+  }
+
+  CAMPUS {
+    uuid id PK
+    string name
+    string city
+    string country
+    string timezone
+  }
+
+  BUILDING {
+    uuid id PK
+    uuid campus_id FK
+    string name
+    string code
+    string address
+  }
+
+  LOCATION {
+    uuid id PK
+    uuid building_id FK
+    uuid campus_id FK
+    uuid parent_location_id FK
+    string name
+    string location_type
+    string room_number
+    int capacity
+  }
+
+  EVENT {
+    uuid id PK
+    uuid location_id FK
+    uuid created_by_user_id FK
+    string title
+    string description
+    datetime starts_at
+    datetime ends_at
+    string status
+  }
+
+  EVENT_ATTENDEE {
+    uuid event_id PK, FK
+    uuid user_id PK, FK
+    string attendance_status
+    datetime registered_at
+  }
+
+  ACTIVITY_CLUB {
+    uuid id PK
+    uuid owner_user_id FK
+    string name
+    string description
+    string status
+  }
+
+  CLUB_MEMBERSHIP {
+    uuid club_id PK, FK
+    uuid user_id PK, FK
+    string member_role
+    datetime joined_at
+  }
+
+  CLUB_EVENT {
+    uuid club_id PK, FK
+    uuid event_id PK, FK
+  }
+
+  NEWS_ARTICLE {
+    uuid id PK
+    uuid author_user_id FK
+    string title
+    string summary
+    string body
+    string status
+    datetime published_at
+  }
+
+  NEWS_TARGET_AUDIENCE {
+    uuid news_id PK, FK
+    string audience_type PK
+  }
+
+  ISSUE {
+    uuid id PK
+    string title
+    string description
+    string status
+    string priority
+    uuid reporter_user_id FK
+    uuid assignee_user_id FK
+    uuid related_event_id FK
+    uuid related_club_id FK
+    uuid related_location_id FK
+    datetime created_at
+    datetime updated_at
+  }
+
+  TEMPLATE {
+    uuid id PK
+    string template_type
+    string channel
+    string locale
+    string name
+    string subject
+    string body
+    string file_path
+    datetime updated_at
+  }
+
+  LANGUAGE {
+    string code PK
+    string name
+    bool is_default
+  }
+
+  TEMPLATE_LANGUAGE {
+    uuid template_id PK, FK
+    string language_code PK, FK
+    bool is_active
+  }
+
+  USER ||--o| STUDENT_PROFILE : has
+  USER ||--o| AMBASSADOR_PROFILE : has
+  USER ||--o| PROFESSOR_PROFILE : has
+
+  BUILDING ||--o{ LOCATION : contains
+  CAMPUS ||--o{ BUILDING : has
+  LOCATION ||--o{ EVENT : hosts
+
+  USER ||--o{ EVENT : creates
+  EVENT ||--o{ EVENT_ATTENDEE : has
+  USER ||--o{ EVENT_ATTENDEE : registers
+
+  USER ||--o{ ACTIVITY_CLUB : owns
+  ACTIVITY_CLUB ||--o{ CLUB_MEMBERSHIP : has
+  USER ||--o{ CLUB_MEMBERSHIP : joins
+  ACTIVITY_CLUB ||--o{ CLUB_EVENT : schedules
+  EVENT ||--o{ CLUB_EVENT : includes
+
+  USER ||--o{ NEWS_ARTICLE : authors
+  NEWS_ARTICLE ||--o{ NEWS_TARGET_AUDIENCE : targets
+
+  USER ||--o{ ISSUE : reports
+  USER ||--o{ ISSUE : assigned
+  EVENT ||--o{ ISSUE : related_to
+  LOCATION ||--o{ ISSUE : related_to
+  ACTIVITY_CLUB ||--o{ ISSUE : related_to
+
+  TEMPLATE ||--o{ TEMPLATE_LANGUAGE : supports
+  LANGUAGE ||--o{ TEMPLATE_LANGUAGE : localizes

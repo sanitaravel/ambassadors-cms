@@ -1,0 +1,127 @@
+{
+  "kind": "collectionType",
+  "collectionName": "up_users",
+  "info": {
+    "name": "user",
+    "description": "",
+    "singularName": "user",
+    "pluralName": "users",
+    "displayName": "User"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "username": {
+      "type": "string",
+      "minLength": 3,
+      "unique": true,
+      "configurable": false,
+      "required": true
+    },
+    "email": {
+      "type": "email",
+      "minLength": 6,
+      "configurable": false,
+      "required": true
+    },
+    "provider": {
+      "type": "string",
+      "configurable": false
+    },
+    "password": {
+      "type": "password",
+      "minLength": 6,
+      "configurable": false,
+      "private": true,
+      "searchable": false
+    },
+    "resetPasswordToken": {
+      "type": "string",
+      "configurable": false,
+      "private": true,
+      "searchable": false
+    },
+    "confirmationToken": {
+      "type": "string",
+      "configurable": false,
+      "private": true,
+      "searchable": false
+    },
+    "confirmed": {
+      "type": "boolean",
+      "default": false,
+      "configurable": false
+    },
+    "blocked": {
+      "type": "boolean",
+      "default": false,
+      "configurable": false
+    },
+    "role": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.role",
+      "inversedBy": "users",
+      "configurable": false
+    },
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "ambassador_profile": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::ambassador-profile.ambassador-profile"
+    },
+    "professor_profile": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::professor-profile.professor-profile"
+    },
+    "events": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::event.event",
+      "mappedBy": "creator"
+    },
+    "event_attendees": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::event-attendee.event-attendee",
+      "mappedBy": "users_permissions_user"
+    },
+    "activity_clubs": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::activity-club.activity-club",
+      "mappedBy": "users_permissions_user"
+    },
+    "club_memberships": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::club-membership.club-membership",
+      "mappedBy": "users_permissions_user"
+    },
+    "news_articles": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::news-article.news-article",
+      "mappedBy": "users_permissions_users"
+    },
+    "issues": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::issue.issue",
+      "mappedBy": "reporter"
+    },
+    "assignee_issues": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::issue.issue",
+      "mappedBy": "assignee"
+    }
+  }
+}

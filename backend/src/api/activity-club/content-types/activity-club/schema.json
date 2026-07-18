@@ -1,0 +1,61 @@
+{
+  "kind": "collectionType",
+  "collectionName": "activity_clubs",
+  "info": {
+    "singularName": "activity-club",
+    "pluralName": "activity-clubs",
+    "displayName": "Activity Club"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "required": true,
+      "unique": true
+    },
+    "description": {
+      "type": "blocks",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "activity_clubs"
+    },
+    "events": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::event.event",
+      "inversedBy": "activity_clubs"
+    },
+    "club_memberships": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::club-membership.club-membership",
+      "mappedBy": "activity_club"
+    },
+    "issues": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::issue.issue",
+      "mappedBy": "related_activity_club"
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "kind": "collectionType",
+  "collectionName": "student_profiles",
+  "info": {
+    "singularName": "student-profile",
+    "pluralName": "student-profiles",
+    "displayName": "Student Profile"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "student_number": {
+      "type": "biginteger",
+      "required": true
+    },
+    "program": {
+      "type": "string",
+      "required": true
+    },
+    "year_of_study": {
+      "type": "integer",
+      "required": true,
+      "min": 2000
+    },
+    "month_of_study": {
+      "type": "integer",
+      "required": true,
+      "min": 1,
+      "max": 12
+    }
+  }
+}

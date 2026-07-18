@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "collectionName": "professor_profiles",
+  "info": {
+    "singularName": "professor-profile",
+    "pluralName": "professor-profiles",
+    "displayName": "Professor Profile"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "department": {
+      "type": "enumeration",
+      "required": true,
+      "enum": [
+        "natural_science",
+        "law",
+        "finance"
+      ]
+    },
+    "title": {
+      "type": "enumeration",
+      "required": true,
+      "enum": [
+        "Prof.",
+        "Prof. Dr."
+      ]
+    }
+  }
+}
