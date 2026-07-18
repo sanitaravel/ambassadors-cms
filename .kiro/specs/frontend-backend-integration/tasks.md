@@ -84,8 +84,8 @@ This plan implements the integration layer between the React 19 frontend and the
 - [ ] 5. Checkpoint - Ensure infrastructure and services compile
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 6. Implement Club and Event Services
-  - [ ] 6.1 Implement Club Service
+- [x] 6. Implement Club and Event Services
+  - [x] 6.1 Implement Club Service
     - Create `src/api/club-service.ts` with `createClub`, `getPendingClubs`, `approveClub`, `denyClub`
     - `createClub` sends POST with name, description, and user relation
     - `getPendingClubs` fetches clubs with `publicationState=preview`, populates creator
@@ -93,7 +93,7 @@ This plan implements the integration layer between the React 19 frontend and the
     - `denyClub` deletes the draft club
     - _Requirements: 11.1, 11.2, 11.3, 12.1, 12.2, 12.3_
 
-  - [ ] 6.2 Implement Event Service
+  - [x] 6.2 Implement Event Service
     - Create `src/api/event-service.ts` with `createEvent`, `getPendingEvents`, `approveEvent`, `denyEvent`
     - `createEvent` validates `ends_at > starts_at` before sending request
     - Sets `event_status` to "Pending Approval" on creation
@@ -102,7 +102,7 @@ This plan implements the integration layer between the React 19 frontend and the
     - `denyEvent` updates status to "Denied"
     - _Requirements: 13.1, 13.2, 13.3, 13.4, 13.5, 13.6, 14.1, 14.2, 14.3_
 
-  - [ ]* 6.3 Write property test for Event Service (Property 12)
+  - [x] 6.3 Write property test for Event Service (Property 12)
     - **Property 12: Event DateTime Validation** — ends_at ≤ starts_at → ApiError returned
     - Create `src/api/__tests__/event-service.property.test.ts` using fast-check
     - **Validates: Requirements 13.5**
