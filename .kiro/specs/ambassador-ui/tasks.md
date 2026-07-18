@@ -112,8 +112,8 @@ Build the React SPA content management interface for the SRH Ambassador Platform
     - Ensure 44x44px minimum touch targets for buttons
     - _Requirements: 12.2, 12.4, 12.5_
 
-- [ ] 7. Implement content listing page
-  - [ ] 7.1 Create ContentListPage component
+- [x] 7. Implement content listing page
+  - [x] 7.1 Create ContentListPage component
     - Create `src/pages/content/ContentListPage.tsx` accepting `contentType`, `displayName`, `nameField` props
     - Use `useApiQuery` with pagination (default 25 per page) to fetch content
     - Render table/cards showing entity name and creation date
@@ -124,7 +124,7 @@ Build the React SPA content management interface for the SRH Ambassador Platform
     - Display previous/next pagination controls when total > 25, showing current page/total pages
     - _Requirements: 5.1, 5.2, 5.3, 5.4, 5.5, 5.6, 5.7_
 
-  - [ ]* 7.2 Write unit tests for ContentListPage
+  - [x] 7.2 Write unit tests for ContentListPage
     - Test: renders entities with name and date
     - Test: displays loading indicator
     - Test: shows error + retry on failure
