@@ -45,8 +45,8 @@ This plan implements the integration layer between the React 19 frontend and the
     - Create `src/api/__tests__/client.property.test.ts` using fast-check
     - **Validates: Requirements 1.2, 1.3, 1.4, 6.1, 7.1, 7.2, 7.3**
 
-- [ ] 3. Implement Auth Service
-  - [ ] 3.1 Implement Auth Service module
+- [x] 3. Implement Auth Service
+  - [x] 3.1 Implement Auth Service module
     - Create `src/api/auth-service.ts` with `login()`, `register()`, `getMe()`, `logout()` functions
     - `login` POSTs to `/auth/local` with `identifier` and `password`
     - `register` POSTs to `/auth/local/register` with `username`, `email`, `password`
@@ -56,7 +56,7 @@ This plan implements the integration layer between the React 19 frontend and the
     - Handle malformed responses (missing jwt/user) as ApiError
     - _Requirements: 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 3.1, 3.2, 3.3, 3.4, 3.5, 4.6, 4.7_
 
-  - [ ]* 3.2 Write property tests for Auth Service (Properties 3, 4, 5)
+  - [x] 3.2 Write property tests for Auth Service (Properties 3, 4, 5)
     - **Property 3: Token Storage on Authentication Success** — Successful auth response → token stored in Token Store
     - **Property 4: User Extraction from Authentication Response** — Valid response → user fields preserved without mutation
     - **Property 5: Malformed Authentication Response Detection** — Missing jwt or user → ApiError returned
