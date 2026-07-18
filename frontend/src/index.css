@@ -95,3 +95,62 @@ code {
     transform: rotate(360deg);
   }
 }
+
+/* TipTap Rich Text Editor Styles */
+.tiptap {
+  outline: none;
+  min-height: 180px;
+  padding: 12px;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.tiptap p {
+  margin: 0 0 8px;
+}
+
+.tiptap h1,
+.tiptap h2,
+.tiptap h3 {
+  margin: 16px 0 8px;
+}
+
+.tiptap h2 {
+  font-size: 20px;
+}
+
+.tiptap h3 {
+  font-size: 18px;
+}
+
+.tiptap ul,
+.tiptap ol {
+  margin: 8px 0;
+  padding-left: 24px;
+}
+
+.tiptap li {
+  margin-bottom: 4px;
+}
+
+.tiptap blockquote {
+  border-left: 3px solid #d1d5db;
+  margin: 8px 0;
+  padding-left: 12px;
+  color: #6b7280;
+}
+
+.tiptap code {
+  background: #f3f4f6;
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-size: 14px;
+}
+
+.tiptap p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  color: #9ca3af;
+  pointer-events: none;
+  float: left;
+  height: 0;
+}

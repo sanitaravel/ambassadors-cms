@@ -19,8 +19,10 @@ export interface EventFormData {
   location: string; // documentId of selected location, or empty
 }
 
+import type { StrapiBlock } from '../components/forms/strapi-blocks';
+
 export interface NewsArticleFormData {
   title: string;
   summary: string;
-  body: string; // Rich text stored as string for the editor
+  body: StrapiBlock[]; // Strapi v5 blocks format
 }

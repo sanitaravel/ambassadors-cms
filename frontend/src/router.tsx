@@ -5,33 +5,21 @@ import { NotFoundPage } from './pages/NotFoundPage';
 import { LoginPage } from './pages/LoginPage';
 import { DashboardPage } from './pages/DashboardPage';
 import { ContentListPage } from './pages/content/ContentListPage';
-
-function CreateClubPage() {
-  return <div>Create Club</div>;
-}
+import { CreateClubPage } from './pages/content/CreateClubPage';
+import { CreateBuildingPage } from './pages/content/CreateBuildingPage';
+import { CreateEventPage } from './pages/content/CreateEventPage';
+import { CreateNewsArticlePage } from './pages/content/CreateNewsArticlePage';
 
 function EditClubPage() {
   return <div>Edit Club</div>;
-}
-
-function CreateBuildingPage() {
-  return <div>Create Building</div>;
 }
 
 function EditBuildingPage() {
   return <div>Edit Building</div>;
 }
 
-function CreateEventPage() {
-  return <div>Create Event</div>;
-}
-
 function EditEventPage() {
   return <div>Edit Event</div>;
-}
-
-function CreateNewsArticlePage() {
-  return <div>Create News Article</div>;
 }
 
 function EditNewsArticlePage() {

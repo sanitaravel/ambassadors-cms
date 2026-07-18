@@ -7,20 +7,21 @@ const clubService = createContentService<ActivityClub>('activity-clubs');
 
 /**
  * Creates a new activity club in draft (unpublished) state.
- * The club is associated with the given user as the owner.
+ * Note: The owner relation (users_permissions_user) is not settable via the
+ * Strapi v5 REST content API by default. The club is created without an owner
+ * unless a custom lifecycle/controller is added to assign it server-side.
  *
  * @param data - Club name (required, max 255 chars) and optional description
- * @param userId - ID of the user creating the club (owner relation)
+ * @param _userId - ID of the user creating the club (currently unused — relation not writable via REST)
  * @returns The created club entity
  */
 export async function createClub(
   data: { name: string; description?: BlockContent },
-  userId: number
+  _userId: number
 ): Promise<StrapiEntity<ActivityClub>> {
   return clubService.create({
     name: data.name,
     description: data.description,
-    users_permissions_user: userId as unknown,
   } as Partial<ActivityClub>);
 }
 

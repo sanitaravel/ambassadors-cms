@@ -1,3 +1,6 @@
+import { RichTextEditor } from './RichTextEditor';
+import type { StrapiBlock } from './strapi-blocks';
+
 export interface FormFieldProps {
   label: string;
   name: string;
@@ -5,8 +8,9 @@ export interface FormFieldProps {
   required?: boolean;
   maxLength?: number;
   error?: string;
-  value: string;
-  onChange: (value: string) => void;
+  value: string | StrapiBlock[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onChange: (value: any) => void;
   options?: { value: string; label: string }[];
   placeholder?: string;
 }
@@ -32,13 +36,16 @@ export function FormField({
       ...(error ? styles.inputError : {}),
     };
 
+    // For non-richtext types, value is always a string
+    const stringValue = value as string;
+
     switch (type) {
       case 'textarea':
         return (
           <textarea
             id={inputId}
             name={name}
-            value={value}
+            value={stringValue}
             onChange={(e) => onChange(e.target.value)}
             required={required}
             maxLength={maxLength}
@@ -51,17 +58,11 @@ export function FormField({
 
       case 'richtext':
         return (
-          <textarea
-            id={inputId}
-            name={name}
-            value={value}
-            onChange={(e) => onChange(e.target.value)}
-            required={required}
-            maxLength={maxLength}
+          <RichTextEditor
+            value={value as StrapiBlock[] | string}
+            onChange={(blocks) => onChange(blocks)}
             placeholder={placeholder}
-            style={{ ...baseInputStyle, ...styles.richtext }}
-            aria-invalid={!!error}
-            aria-describedby={error ? errorId : undefined}
+            error={!!error}
           />
         );
 
@@ -71,7 +72,7 @@ export function FormField({
             id={inputId}
             name={name}
             type="datetime-local"
-            value={value}
+            value={stringValue}
             onChange={(e) => onChange(e.target.value)}
             required={required}
             placeholder={placeholder}
@@ -86,7 +87,7 @@ export function FormField({
           <select
             id={inputId}
             name={name}
-            value={value}
+            value={stringValue}
             onChange={(e) => onChange(e.target.value)}
             required={required}
             style={baseInputStyle}
@@ -109,7 +110,7 @@ export function FormField({
             id={inputId}
             name={name}
             type="text"
-            value={value}
+            value={stringValue}
             onChange={(e) => onChange(e.target.value)}
             required={required}
             maxLength={maxLength}

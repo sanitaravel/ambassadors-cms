@@ -133,7 +133,7 @@ Build the React SPA content management interface for the SRH Ambassador Platform
     - _Requirements: 5.1–5.7_
 
 - [ ] 8. Implement content creation pages
-  - [ ] 8.1 Create CreateClubPage
+  - [x] 8.1 Create CreateClubPage
     - Create `src/pages/content/CreateClubPage.tsx` with name (required, max 255) and description (optional, rich text) fields
     - Use `useApiMutation` with `activityClubService.create`; set current user as owner; create in draft state
     - Run `validateClubForm` on submit; show field errors if invalid
@@ -142,7 +142,7 @@ Build the React SPA content management interface for the SRH Ambassador Platform
     - Disable submit + show loading while in progress
     - _Requirements: 6.1, 6.2, 6.3, 6.4, 6.5, 6.6_
 
-  - [ ] 8.2 Create CreateBuildingPage
+  - [x] 8.2 Create CreateBuildingPage
     - Create `src/pages/content/CreateBuildingPage.tsx` with name (required), code (required), address (required), campus (optional, dropdown fetched from backend)
     - Use `useApiMutation` with `buildingService.create`
     - Run `validateBuildingForm` on submit; show field errors if invalid
@@ -151,7 +151,7 @@ Build the React SPA content management interface for the SRH Ambassador Platform
     - Disable submit + show loading while in progress
     - _Requirements: 7.1, 7.2, 7.3, 7.4, 7.5, 7.6_
 
-  - [ ] 8.3 Create CreateEventPage
+  - [x] 8.3 Create CreateEventPage
     - Create `src/pages/content/CreateEventPage.tsx` with title (required, max 255), description (optional, rich text), starts_at (required, datetime), ends_at (required, datetime), event_status (required, dropdown: planned/ongoing/completed/cancelled), location (optional, dropdown fetched from backend)
     - Use `useApiMutation` with `eventService.create`; set current user as creator
     - Run `validateEventForm` on submit (including date ordering check); show field errors if invalid
@@ -160,7 +160,7 @@ Build the React SPA content management interface for the SRH Ambassador Platform
     - Disable submit + show loading while in progress
     - _Requirements: 8.1, 8.2, 8.3, 8.4, 8.5, 8.6_
 
-  - [ ] 8.4 Create CreateNewsArticlePage
+  - [x] 8.4 Create CreateNewsArticlePage
     - Create `src/pages/content/CreateNewsArticlePage.tsx` with title (required, max 255), summary (optional, text), body (required, rich text)
     - Use `useApiMutation` with `newsArticleService.create`; set current user as author
     - Run `validateNewsArticleForm` on submit; show field errors if invalid
