@@ -20,7 +20,7 @@ export async function createClub(
   return clubService.create({
     name: data.name,
     description: data.description,
-    users_permissions_user: userId,
+    users_permissions_user: userId as unknown,
   } as Partial<ActivityClub>);
 }
 

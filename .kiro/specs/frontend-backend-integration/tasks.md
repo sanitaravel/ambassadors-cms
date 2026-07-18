@@ -162,25 +162,25 @@ This plan implements the integration layer between the React 19 frontend and the
 - [ ] 9. Checkpoint - Ensure all layers compile and tests pass
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 10. Wire components together and integrate into app
-  - [ ] 10.1 Create environment configuration
+- [x] 10. Wire components together and integrate into app
+  - [x] 10.1 Create environment configuration
     - Create `frontend/.env.example` with `VITE_STRAPI_URL=http://localhost:1337`
     - Create `frontend/.env` (gitignored) with local Strapi URL
     - Add `src/vite-env.d.ts` type augmentation for `ImportMetaEnv` with `VITE_STRAPI_URL`
     - _Requirements: 1.1_
 
-  - [ ] 10.2 Wire AuthProvider into the application root
+  - [x] 10.2 Wire AuthProvider into the application root
     - Update `src/main.tsx` to wrap `<App />` with `<AuthProvider>`
     - Ensure the provider is at the top level so all components can access auth state
     - _Requirements: 9.1, 9.5_
 
-  - [ ] 10.3 Create pre-configured content service instances
+  - [x] 10.3 Create pre-configured content service instances
     - Create `src/api/services.ts` exporting typed service instances for all content types:
       `campusService`, `buildingService`, `locationService`, `eventService`, `eventAttendeeService`, `activityClubService`, `clubMembershipService`, `ambassadorProfileService`, `studentProfileService`, `professorProfileService`, `newsArticleService`, `issueService`
     - Export club service and event service instances
     - _Requirements: 6.1, 11.1, 12.1, 13.1, 14.1_
 
-  - [ ]* 10.4 Write integration tests for key flows
+  - [x] 10.4 Write integration tests for key flows
     - Create `src/__tests__/integration/auth-flow.test.ts` using MSW
     - Test full login → profile fetch → role assignment flow
     - Test club creation → pending state
