@@ -63,8 +63,8 @@ This plan implements the integration layer between the React 19 frontend and the
     - Create `src/api/__tests__/auth-service.property.test.ts` using fast-check
     - **Validates: Requirements 2.2, 2.3, 2.6, 3.2, 3.3**
 
-- [ ] 4. Implement Content Service
-  - [ ] 4.1 Implement Content Service Factory
+- [x] 4. Implement Content Service
+  - [x] 4.1 Implement Content Service Factory
     - Create `src/api/content-service.ts` with `createContentService<T>(pluralName: string)` factory
     - Implement `getMany`, `getOne`, `create`, `update`, `delete` methods
     - Use `qs` library with `encodeValuesOnly` for query parameter serialization
@@ -73,7 +73,7 @@ This plan implements the integration layer between the React 19 frontend and the
     - Propagate ApiErrors without modification
     - _Requirements: 6.1, 6.2, 6.3, 6.4, 6.5, 6.6, 6.7, 6.8_
 
-  - [ ]* 4.2 Write property tests for Content Service (Properties 6, 7, 8, 9)
+  - [x] 4.2 Write property tests for Content Service (Properties 6, 7, 8, 9)
     - **Property 6: Strapi Response Envelope Unwrapping** — Valid envelopes → data and pagination preserved
     - **Property 7: Query Parameter Serialization** — Options → correct qs-serialized query string
     - **Property 8: Mutation Request Body Wrapping** — Entity data → wrapped in `{ data: ... }`
