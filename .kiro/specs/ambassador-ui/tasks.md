@@ -43,7 +43,7 @@ Build the React SPA content management interface for the SRH Ambassador Platform
   - Ensure all tests pass, ask the user if questions arise.
 
 - [ ] 3. Set up routing and layout infrastructure
-  - [ ] 3.1 Install react-router and set up router configuration
+  - [x] 3.1 Install react-router and set up router configuration
     - Install `react-router` (v7) dependency
     - Create `src/router.tsx` with route definitions matching the routing table in the design document
     - Update `src/App.tsx` to render `AuthProvider` wrapping `RouterProvider`
