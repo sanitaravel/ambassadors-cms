@@ -6,8 +6,8 @@ This plan implements the integration layer between the React 19 frontend and the
 
 ## Tasks
 
-- [-] 1. Set up testing infrastructure and install dependencies
-  - [-] 1.1 Install required dependencies and configure Vitest
+- [x] 1. Set up testing infrastructure and install dependencies
+  - [x] 1.1 Install required dependencies and configure Vitest
     - Add `qs`, `@types/qs` to dependencies
     - Add `vitest`, `@testing-library/react`, `@testing-library/jest-dom`, `fast-check`, `msw`, `jsdom` to devDependencies
     - Add `"test": "vitest --run"` script to `package.json`
