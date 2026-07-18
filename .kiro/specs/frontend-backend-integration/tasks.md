@@ -16,13 +16,13 @@ This plan implements the integration layer between the React 19 frontend and the
     - _Requirements: Design Testing Strategy_
 
 - [ ] 2. Implement Infrastructure Layer
-  - [ ] 2.1 Create TypeScript types and interfaces for API layer
+  - [x] 2.1 Create TypeScript types and interfaces for API layer
     - Create `src/api/types.ts` with `ApiError`, `ValidationError`, `StrapiEntity<T>`, `StrapiResponse<T>`, `StrapiSingleResponse<T>`, `PaginationMeta`, `CollectionResponse<T>` types
     - Create `src/api/content-types.ts` with all content type interfaces: `Campus`, `Building`, `Location`, `Event`, `EventAttendee`, `ActivityClub`, `ClubMembership`, `AmbassadorProfile`, `StudentProfile`, `ProfessorProfile`, `NewsArticle`, `Issue`
     - Create `src/api/enums.ts` with string union types: `EventStatus`, `LocationType`, `Priority`, `FocusArea`, `MemberRole`, `Department`, `ProfessorTitle`
     - _Requirements: 5.1, 5.2, 5.3, 5.4, 5.5_
 
-  - [ ] 2.2 Implement Token Store module
+  - [x] 2.2 Implement Token Store module
     - Create `src/api/token-store.ts` with `getToken()`, `setToken(token)`, `removeToken()` functions
     - Use localStorage with key `strapi_jwt`
     - _Requirements: 1.4, 1.5, 4.1_
