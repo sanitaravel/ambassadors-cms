@@ -69,8 +69,8 @@ Build the React SPA content management interface for the SRH Ambassador Platform
     - Register as catch-all route in router config
     - _Requirements: 3.5_
 
-- [ ] 4. Implement login page and auth redirect flow
-  - [ ] 4.1 Create LoginPage component
+- [x] 4. Implement login page and auth redirect flow
+  - [x] 4.1 Create LoginPage component
     - Create `src/pages/LoginPage.tsx` with email input (max 254 chars), password input (max 128 chars), and submit button
     - Style submit button with accent color (#d54407)
     - Prevent submission when either field is empty (display required-field validation)
@@ -81,7 +81,7 @@ Build the React SPA content management interface for the SRH Ambassador Platform
     - If already authenticated, redirect to Dashboard
     - _Requirements: 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 11.2, 11.3_
 
-  - [ ]* 4.2 Write unit tests for LoginPage
+  - [x] 4.2 Write unit tests for LoginPage
     - Test: renders email/password fields and submit button
     - Test: shows validation error when fields empty
     - Test: redirects to dashboard on success

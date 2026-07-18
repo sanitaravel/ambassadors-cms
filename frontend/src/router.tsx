@@ -2,12 +2,7 @@ import { createBrowserRouter } from 'react-router';
 import { AuthGuard } from './components/auth/AuthGuard';
 import { AppLayout } from './components/layout/AppLayout';
 import { NotFoundPage } from './pages/NotFoundPage';
-
-// Placeholder components — will be replaced with real implementations in later tasks
-
-function LoginPage() {
-  return <div>Login Page</div>;
-}
+import { LoginPage } from './pages/LoginPage';
 
 function DashboardPage() {
   return <div>Dashboard</div>;
