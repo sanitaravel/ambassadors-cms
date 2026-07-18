@@ -104,8 +104,8 @@ Build the React SPA content management interface for the SRH Ambassador Platform
     - Test: shows focus area for ambassador; shows placeholder when missing
     - _Requirements: 4.1–4.5_
 
-- [ ] 6. Implement shared form components
-  - [ ] 6.1 Create FormField and FormActions components
+- [x] 6. Implement shared form components
+  - [x] 6.1 Create FormField and FormActions components
     - Create `src/components/forms/FormField.tsx` supporting types: text, textarea, richtext, datetime, select
     - Display validation errors in red (#dc2626) below the input (within 8px), min 14px font
     - Create `src/components/forms/FormActions.tsx` with submit button (disabled + loading indicator when `isLoading`) and optional cancel button
