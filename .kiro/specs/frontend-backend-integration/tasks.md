@@ -107,8 +107,8 @@ This plan implements the integration layer between the React 19 frontend and the
     - Create `src/api/__tests__/event-service.property.test.ts` using fast-check
     - **Validates: Requirements 13.5**
 
-- [ ] 7. Implement UI Layer - Hooks
-  - [ ] 7.1 Implement useApiQuery hook
+- [x] 7. Implement UI Layer - Hooks
+  - [x] 7.1 Implement useApiQuery hook
     - Create `src/hooks/use-api-query.ts`
     - Accept fetcher function, return `{ data, isLoading, error, isSuccess, refetch }`
     - Initialize with loading state, invoke fetcher on mount
@@ -117,7 +117,7 @@ This plan implements the integration layer between the React 19 frontend and the
     - `refetch` resets loading/error and re-invokes fetcher
     - _Requirements: 8.1, 8.2, 8.3, 8.4, 8.5, 8.8_
 
-  - [ ] 7.2 Implement useApiMutation hook
+  - [x] 7.2 Implement useApiMutation hook
     - Create `src/hooks/use-api-mutation.ts`
     - Accept mutation function, return `{ mutate, reset, data, isLoading, error, isSuccess }`
     - `mutate` sets loading, invokes mutation function, updates state on resolve/reject
@@ -125,7 +125,7 @@ This plan implements the integration layer between the React 19 frontend and the
     - Prevent state updates after unmount
     - _Requirements: 8.6, 8.7, 8.8_
 
-  - [ ]* 7.3 Write unit tests for useApiQuery and useApiMutation
+  - [x] 7.3 Write unit tests for useApiQuery and useApiMutation
     - Create `src/hooks/__tests__/use-api-query.test.ts`
     - Create `src/hooks/__tests__/use-api-mutation.test.ts`
     - Test lifecycle: mount → loading → success/error
