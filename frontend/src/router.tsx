@@ -3,10 +3,7 @@ import { AuthGuard } from './components/auth/AuthGuard';
 import { AppLayout } from './components/layout/AppLayout';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { LoginPage } from './pages/LoginPage';
-
-function DashboardPage() {
-  return <div>Dashboard</div>;
-}
+import { DashboardPage } from './pages/DashboardPage';
 
 function ContentListPage() {
   return <div>Content List</div>;

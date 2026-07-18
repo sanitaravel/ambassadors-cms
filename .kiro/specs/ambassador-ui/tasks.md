@@ -90,14 +90,14 @@ Build the React SPA content management interface for the SRH Ambassador Platform
     - Test: redirects authenticated user away from login
     - _Requirements: 1.1–1.7_
 
-- [ ] 5. Implement Dashboard page
-  - [ ] 5.1 Create DashboardPage component
+- [x] 5. Implement Dashboard page
+  - [x] 5.1 Create DashboardPage component
     - Create `src/pages/DashboardPage.tsx` with welcome message including username from `useAuth()`
     - Render quick-action cards using `getPermittedContentTypes(role)` — each card links to the "Add" form for that content type
     - For ambassador role, display focus area from profile; if not set, show "No focus area assigned" message
     - _Requirements: 4.1, 4.2, 4.3, 4.4, 4.5_
 
-  - [ ]* 5.2 Write unit tests for DashboardPage
+  - [x] 5.2 Write unit tests for DashboardPage
     - Test: renders welcome message with username
     - Test: renders all 4 quick-action cards for student/ambassador roles
     - Test: renders only 2 cards for professor/null roles

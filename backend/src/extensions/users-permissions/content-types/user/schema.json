@@ -122,6 +122,11 @@
       "relation": "oneToMany",
       "target": "api::issue.issue",
       "mappedBy": "assignee"
+    },
+    "student_profile": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::student-profile.student-profile"
     }
   }
 }
