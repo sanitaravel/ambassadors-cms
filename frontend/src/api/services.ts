@@ -29,6 +29,6 @@ export const newsArticleService = createContentService<NewsArticle>('news-articl
 export const issueService = createContentService<Issue>('issues');
 
 // Re-export domain-specific services for club and event workflows
-export { createClub, getPendingClubs, approveClub, denyClub } from './club-service';
+export { createClub, getPendingClubs, approveClub, denyClub, getUsers, getClubMembers, addClubMember, removeClubMember } from './club-service';
 export { createEvent, getPendingEvents, approveEvent, denyEvent } from './event-service';
 export type { CreateEventData } from './event-service';

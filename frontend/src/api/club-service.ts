@@ -1,18 +1,18 @@
 import type { StrapiEntity, CollectionResponse, StrapiSingleResponse } from './types';
-import type { ActivityClub, BlockContent } from './content-types';
+import type { ActivityClub, ClubMembership, BlockContent, StrapiUser } from './content-types';
 import { apiClient } from './client';
 import { createContentService } from './content-service';
 
 const clubService = createContentService<ActivityClub>('activity-clubs');
+const clubMembershipService = createContentService<ClubMembership>('club-memberships');
 
 /**
  * Creates a new activity club in draft (unpublished) state.
- * Note: The owner relation (users_permissions_user) is not settable via the
- * Strapi v5 REST content API by default. The club is created without an owner
- * unless a custom lifecycle/controller is added to assign it server-side.
+ * The owner (users_permissions_user) is automatically assigned server-side
+ * via a lifecycle hook based on the authenticated user.
  *
  * @param data - Club name (required, max 255 chars) and optional description
- * @param _userId - ID of the user creating the club (currently unused — relation not writable via REST)
+ * @param _userId - ID of the user creating the club (handled server-side)
  * @returns The created club entity
  */
 export async function createClub(
@@ -61,4 +61,56 @@ export async function approveClub(documentId: string): Promise<StrapiEntity<Acti
  */
 export async function denyClub(documentId: string): Promise<void> {
   return clubService.delete(documentId);
+}
+
+/**
+ * Fetches all registered users (for member selection).
+ * Uses Strapi's users-permissions /users endpoint.
+ */
+export async function getUsers(): Promise<StrapiUser[]> {
+  return apiClient<StrapiUser[]>({
+    method: 'GET',
+    path: '/users',
+  });
+}
+
+/**
+ * Fetches memberships for a specific club with user info populated.
+ */
+export async function getClubMembers(clubDocumentId: string): Promise<CollectionResponse<ClubMembership>> {
+  return clubMembershipService.getMany({
+    filters: { activity_club: { documentId: { $eq: clubDocumentId } } },
+    populate: {
+      users_permissions_user: { fields: ['id', 'username', 'email'] },
+    },
+    pagination: { pageSize: 100 },
+  });
+}
+
+/**
+ * Adds a user to a club as a member by creating a club-membership entry.
+ *
+ * @param clubDocumentId - The documentId of the club
+ * @param userDocumentId - The documentId of the user to add
+ * @param role - The role to assign (defaults to 'member')
+ */
+export async function addClubMember(
+  clubDocumentId: string,
+  userDocumentId: string,
+  role: 'owner' | 'admin' | 'member' | 'guest' = 'member'
+): Promise<StrapiEntity<ClubMembership>> {
+  return clubMembershipService.create({
+    activity_club: clubDocumentId,
+    users_permissions_user: userDocumentId,
+    member_role: role,
+  } as unknown as Partial<ClubMembership>);
+}
+
+/**
+ * Removes a member from a club by deleting the club-membership entry.
+ *
+ * @param membershipDocumentId - The documentId of the membership to remove
+ */
+export async function removeClubMember(membershipDocumentId: string): Promise<void> {
+  return clubMembershipService.delete(membershipDocumentId);
 }

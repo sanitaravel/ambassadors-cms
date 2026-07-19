@@ -9,7 +9,6 @@ export interface NavBarProps {
 const navLinks = [
   { to: '/', label: 'Dashboard' },
   { to: '/activity-clubs', label: 'Activity Clubs' },
-  { to: '/buildings', label: 'Buildings' },
   { to: '/events', label: 'Events' },
   { to: '/news-articles', label: 'News Articles' },
 ];

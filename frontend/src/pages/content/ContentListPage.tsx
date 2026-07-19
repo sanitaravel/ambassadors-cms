@@ -1,25 +1,127 @@
 import { useState, useCallback, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { useApiQuery } from '../../hooks/use-api-query';
-import { createContentService } from '../../api/content-service';
+import { createContentService, type ContentServiceOptions } from '../../api/content-service';
 import type { CollectionResponse } from '../../api/types';
 
 export interface ContentListPageProps {
-  contentType: 'activity-clubs' | 'buildings' | 'events' | 'news-articles';
+  contentType: 'activity-clubs' | 'events' | 'news-articles';
   displayName: string;
-  nameField: string;
 }
+
+interface ColumnDef {
+  header: string;
+  accessor: (entity: Record<string, unknown>) => string;
+}
+
+interface ContentTypeConfig {
+  columns: ColumnDef[];
+  populate?: ContentServiceOptions['populate'];
+}
+
+const CONTENT_TYPE_CONFIGS: Record<ContentListPageProps['contentType'], ContentTypeConfig> = {
+  'activity-clubs': {
+    columns: [
+      { header: 'Name', accessor: (e) => String(e.name ?? '') },
+      {
+        header: 'Owner',
+        accessor: (e) => {
+          const raw = e.users_permissions_user;
+          const user = (raw as any)?.data ?? raw;
+          return user?.username ? String(user.username) : '—';
+        },
+      },
+      { header: 'Created', accessor: (e) => formatDate(e.createdAt as string | undefined) },
+      { header: 'Updated', accessor: (e) => formatDate(e.updatedAt as string | undefined) },
+    ],
+    populate: {
+      users_permissions_user: {
+        fields: ['username'],
+      },
+    },
+  },
+  events: {
+    columns: [
+      { header: 'Title', accessor: (e) => String(e.title ?? '') },
+      {
+        header: 'Status',
+        accessor: (e) => String(e.event_status ?? '—'),
+      },
+      { header: 'Starts', accessor: (e) => formatDateTime(e.starts_at as string | undefined) },
+      { header: 'Ends', accessor: (e) => formatDateTime(e.ends_at as string | undefined) },
+      {
+        header: 'Location',
+        accessor: (e) => {
+          const raw = e.location;
+          const location = (raw as any)?.data ?? raw;
+          return location?.name ? String(location.name) : '—';
+        },
+      },
+      {
+        header: 'Creator',
+        accessor: (e) => {
+          const raw = e.creator;
+          const creator = (raw as any)?.data ?? raw;
+          return creator?.username ? String(creator.username) : '—';
+        },
+      },
+    ],
+    populate: {
+      location: {
+        fields: ['name'],
+      },
+      creator: {
+        fields: ['username'],
+      },
+    },
+  },
+  'news-articles': {
+    columns: [
+      { header: 'Title', accessor: (e) => String(e.title ?? '') },
+      {
+        header: 'Summary',
+        accessor: (e) => {
+          const summary = e.summary as string | undefined;
+          if (!summary) return '—';
+          return summary.length > 80 ? summary.slice(0, 80) + '…' : summary;
+        },
+      },
+      {
+        header: 'Authors',
+        accessor: (e) => {
+          const raw = e.users_permissions_users;
+          // Handle both array and object-with-data shapes
+          const users = Array.isArray(raw) ? raw : (raw as any)?.data ?? [];
+          if (!users || users.length === 0) return '—';
+          return users.map((u: any) => String(u.username ?? u.attributes?.username ?? '')).filter(Boolean).join(', ') || '—';
+        },
+      },
+      { header: 'Published', accessor: (e) => formatDate(e.publishedAt as string | undefined) },
+      { header: 'Updated', accessor: (e) => formatDate(e.updatedAt as string | undefined) },
+    ],
+    populate: {
+      users_permissions_users: {
+        fields: ['username'],
+      },
+    },
+  },
+};
 
 const PAGE_SIZE = 25;
 
-export function ContentListPage({ contentType, displayName, nameField }: ContentListPageProps) {
+export function ContentListPage({ contentType, displayName }: ContentListPageProps) {
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
 
+  const config = CONTENT_TYPE_CONFIGS[contentType];
   const service = createContentService<Record<string, unknown>>(contentType);
 
   const fetcher = useCallback(
-    () => service.getMany({ pagination: { page, pageSize: PAGE_SIZE } }),
+    () =>
+      service.getMany({
+        pagination: { page, pageSize: PAGE_SIZE },
+        populate: config.populate,
+      }),
     [page, contentType],
   );
 
@@ -31,7 +133,7 @@ export function ContentListPage({ contentType, displayName, nameField }: Content
     refetch();
   }, [contentType]);
 
-  // Refetch when page changes (but not on contentType change — handled above)
+  // Refetch when page changes
   useEffect(() => {
     refetch();
   }, [page]);
@@ -42,7 +144,7 @@ export function ContentListPage({ contentType, displayName, nameField }: Content
   const total = pagination?.total ?? 0;
 
   function handleEntityClick(documentId: string) {
-    navigate(`/${contentType}/${documentId}/edit`);
+    navigate(`/${contentType}/${documentId}`);
   }
 
   function handlePrevPage() {
@@ -108,37 +210,41 @@ export function ContentListPage({ contentType, displayName, nameField }: Content
         </Link>
       </div>
 
-      <table style={styles.table}>
-        <thead>
-          <tr>
-            <th style={styles.th}>Name</th>
-            <th style={styles.th}>Created</th>
-          </tr>
-        </thead>
-        <tbody>
-          {entities.map((entity) => (
-            <tr
-              key={entity.documentId}
-              onClick={() => handleEntityClick(entity.documentId)}
-              style={styles.tableRow}
-              role="link"
-              tabIndex={0}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  handleEntityClick(entity.documentId);
-                }
-              }}
-            >
-              <td style={styles.td}>
-                {String((entity as Record<string, unknown>)[nameField] ?? '')}
-              </td>
-              <td style={styles.td}>
-                {formatDate((entity as Record<string, unknown>).createdAt as string | undefined)}
-              </td>
+      <div style={styles.tableWrapper}>
+        <table style={styles.table}>
+          <thead>
+            <tr>
+              {config.columns.map((col) => (
+                <th key={col.header} style={styles.th}>
+                  {col.header}
+                </th>
+              ))}
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {entities.map((entity) => (
+              <tr
+                key={entity.documentId}
+                onClick={() => handleEntityClick(entity.documentId)}
+                style={styles.tableRow}
+                role="link"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    handleEntityClick(entity.documentId);
+                  }
+                }}
+              >
+                {config.columns.map((col) => (
+                  <td key={col.header} style={styles.td}>
+                    {col.accessor(entity as Record<string, unknown>)}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
       {total > PAGE_SIZE && (
         <div style={styles.pagination}>
@@ -186,10 +292,25 @@ function formatDate(isoString: string | undefined): string {
   }
 }
 
+function formatDateTime(isoString: string | undefined): string {
+  if (!isoString) return '—';
+  try {
+    return new Date(isoString).toLocaleString(undefined, {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+  } catch {
+    return '—';
+  }
+}
+
 const styles: Record<string, React.CSSProperties> = {
   container: {
     padding: '2rem',
-    maxWidth: '900px',
+    maxWidth: '1100px',
     margin: '0 auto',
     textAlign: 'left',
   },
@@ -278,10 +399,13 @@ const styles: Record<string, React.CSSProperties> = {
     textDecoration: 'none',
     fontSize: '1rem',
   },
+  tableWrapper: {
+    overflowX: 'auto',
+  },
   table: {
     width: '100%',
     borderCollapse: 'collapse',
-    fontSize: '1rem',
+    fontSize: '0.9rem',
   },
   th: {
     textAlign: 'left',
@@ -289,9 +413,10 @@ const styles: Record<string, React.CSSProperties> = {
     borderBottom: '2px solid #e5e4e7',
     fontWeight: 600,
     color: '#333',
-    fontSize: '0.875rem',
+    fontSize: '0.8rem',
     textTransform: 'uppercase' as const,
     letterSpacing: '0.5px',
+    whiteSpace: 'nowrap',
   },
   tableRow: {
     cursor: 'pointer',
