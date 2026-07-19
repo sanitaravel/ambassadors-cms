@@ -9,22 +9,10 @@ import { CreateClubPage } from './pages/content/CreateClubPage';
 import { CreateBuildingPage } from './pages/content/CreateBuildingPage';
 import { CreateEventPage } from './pages/content/CreateEventPage';
 import { CreateNewsArticlePage } from './pages/content/CreateNewsArticlePage';
-
-function EditClubPage() {
-  return <div>Edit Club</div>;
-}
-
-function EditBuildingPage() {
-  return <div>Edit Building</div>;
-}
-
-function EditEventPage() {
-  return <div>Edit Event</div>;
-}
-
-function EditNewsArticlePage() {
-  return <div>Edit News Article</div>;
-}
+import { EditClubPage } from './pages/content/EditClubPage';
+import { EditBuildingPage } from './pages/content/EditBuildingPage';
+import { EditEventPage } from './pages/content/EditEventPage';
+import { EditNewsArticlePage } from './pages/content/EditNewsArticlePage';
 
 // AuthGuard imported from src/components/auth/AuthGuard.tsx
 // AppLayout imported from src/components/layout/AppLayout.tsx

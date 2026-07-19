@@ -173,8 +173,8 @@ Build the React SPA content management interface for the SRH Ambassador Platform
     - Test each creation page: form renders, validation errors display, success navigates, backend errors preserved
     - _Requirements: 6.1–6.6, 7.1–7.6, 8.1–8.6, 9.1–9.5_
 
-- [ ] 9. Implement content edit pages
-  - [ ] 9.1 Create edit pages for each content type
+- [x] 9. Implement content edit pages
+  - [x] 9.1 Create edit pages for each content type
     - Create `src/pages/content/EditClubPage.tsx`, `EditBuildingPage.tsx`, `EditEventPage.tsx`, `EditNewsArticlePage.tsx`
     - Each page: fetch entity by documentId (from route param), pre-populate form with existing values
     - Use same validation functions as creation forms
@@ -202,7 +202,7 @@ Build the React SPA content management interface for the SRH Ambassador Platform
   - Ensure all tests pass, ask the user if questions arise.
 
 - [ ] 11. Wire routing and integrate all pages
-  - [ ] 11.1 Connect all pages to router and finalize navigation
+  - [x] 11.1 Connect all pages to router and finalize navigation
     - Register all page components in `src/router.tsx` with the correct paths and nesting
     - Ensure protected routes are wrapped with AuthGuard
     - Ensure content list pages pass correct `contentType`, `displayName`, and `nameField` props
