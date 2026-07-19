@@ -1,13 +1,14 @@
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
+  --text: #374151;
+  --text-h: #111827;
+  --bg: #ffffff;
   --border: #e5e4e7;
   --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
+  --accent: #d54407;
+  --accent-bg: rgba(213, 68, 7, 0.1);
+  --accent-border: rgba(213, 68, 7, 0.5);
   --social-bg: rgba(244, 243, 236, 0.5);
+  --error: #dc2626;
   --shadow:
     rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
 
@@ -15,7 +16,7 @@
   --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
   --mono: ui-monospace, Consolas, monospace;
 
-  font: 18px/145% var(--sans);
+  font: 16px/1.5 var(--sans);
   letter-spacing: 0.18px;
   color-scheme: light;
   color: var(--text);
@@ -24,13 +25,13 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
 }
 
-
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
 #root {
   max-width: 100%;
@@ -44,8 +45,11 @@
 
 body {
   margin: 0;
+  background-color: #ffffff;
+  font-size: 16px;
 }
 
+/* Heading hierarchy: h1 >= 1.5x body (24px), h2 >= 1.25x body (20px) */
 h1,
 h2 {
   font-family: var(--heading);
@@ -54,25 +58,90 @@ h2 {
 }
 
 h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
+  font-size: 1.5rem; /* 24px - 1.5x base */
   margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
 }
+
 h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
+  font-size: 1.25rem; /* 20px - 1.25x base */
+  line-height: 1.3;
   margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
 }
+
 p {
   margin: 0;
+}
+
+/* Global button and interactive element styles */
+button,
+a,
+input[type="submit"],
+input[type="button"],
+input[type="reset"],
+select,
+[role="button"] {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+button,
+input[type="submit"],
+input[type="button"],
+input[type="reset"] {
+  font-family: inherit;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+/* Focus outline using accent color */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[role="button"]:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Primary button base style */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 10px 24px;
+  background-color: var(--accent);
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: #b83a06;
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Active state accent color */
+a.active,
+[aria-current="page"] {
+  color: var(--accent);
+}
+
+/* Validation error styling (Req 12.4) */
+.field-error {
+  color: var(--error);
+  font-size: 0.875rem; /* 14px minimum */
+  margin-top: 8px;
+  margin-bottom: 0;
 }
 
 code,

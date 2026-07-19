@@ -201,7 +201,7 @@ Build the React SPA content management interface for the SRH Ambassador Platform
 - [ ] 10. Checkpoint - Ensure all tests pass
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 11. Wire routing and integrate all pages
+- [x] 11. Wire routing and integrate all pages
   - [x] 11.1 Connect all pages to router and finalize navigation
     - Register all page components in `src/router.tsx` with the correct paths and nesting
     - Ensure protected routes are wrapped with AuthGuard
@@ -209,7 +209,7 @@ Build the React SPA content management interface for the SRH Ambassador Platform
     - Verify login redirects to stored path after authentication
     - _Requirements: 3.1, 3.5, 3.6, 11.1, 11.2, 11.3, 11.4_
 
-  - [ ] 11.2 Apply visual design system globally
+  - [x] 11.2 Apply visual design system globally
     - Update `src/index.css` with base styles: white background, 16px min body font, heading size hierarchy (1.5x, 1.25x)
     - Ensure accent color (#d54407) is applied consistently to buttons, active states, focus outlines
     - Ensure all interactive elements meet 44x44px minimum touch target
